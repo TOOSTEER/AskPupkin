@@ -1,0 +1,40 @@
+﻿{% load static %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Popular Tags</h5>
+    </div>
+    <div class="card-body">
+        <a href="{% url 'app:by_tag' 'python' %}" class="badge bg-primary text-decoration-none me-1 mb-1">python</a>
+        <a href="{% url 'app:by_tag' 'django' %}" class="badge bg-success text-decoration-none me-1 mb-1">django</a>
+        <a href="{% url 'app:by_tag' 'javascript' %}" class="badge bg-warning text-decoration-none me-1 mb-1">javascript</a>
+        <a href="{% url 'app:by_tag' 'html' %}" class="badge bg-info text-decoration-none me-1 mb-1">html</a>
+        <a href="{% url 'app:by_tag' 'css' %}" class="badge bg-danger text-decoration-none me-1 mb-1">css</a>
+        <a href="{% url 'app:by_tag' 'web' %}" class="badge bg-secondary text-decoration-none me-1 mb-1">web</a>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h5 class="mb-0">Best Members</h5>
+    </div>
+    <div class="card-body">
+        <ul class="list-unstyled mb-0">
+            <li class="mb-2">
+                <img src="{% static 'img/avatars/default-avatar.png' %}" alt="Avatar" class="rounded-circle me-2" width="24" height="24">
+                <a href="#" class="text-decoration-none">John Doe</a>
+            </li>
+            <li class="mb-2">
+                <img src="{% static 'img/avatars/default-avatar.png' %}" alt="Avatar" class="rounded-circle me-2" width="24" height="24">
+                <a href="#" class="text-decoration-none">Jane Smith</a>
+            </li>
+            <li class="mb-2">
+                <img src="{% static 'img/avatars/default-avatar.png' %}" alt="Avatar" class="rounded-circle me-2" width="24" height="24">
+                <a href="#" class="text-decoration-none">Mike Johnson</a>
+            </li>
+            <li>
+                <img src="{% static 'img/avatars/default-avatar.png' %}" alt="Avatar" class="rounded-circle me-2" width="24" height="24">
+                <a href="#" class="text-decoration-none">Sarah Wilson</a>
+            </li>
+        </ul>
+    </div>
+</div>
