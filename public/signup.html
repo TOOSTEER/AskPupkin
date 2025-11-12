@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - AskPupkin</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="../static/img/logo.png" alt="AskPupkin" height="30">
+            </a>
+
+            <form class="d-flex mx-3 flex-grow-1" action="index.html" method="get">
+                <input class="form-control me-2" type="search" placeholder="Поиск..." name="q">
+                <button class="btn btn-outline-success" type="submit">Найти</button>
+            </form>
+
+            <div class="d-flex align-items-center">
+                <div id="auth-buttons">
+                    <a href="login.html" class="btn btn-outline-primary me-2">Войти</a>
+                    <a href="signup.html" class="btn btn-primary">Регистрация</a>
+                </div>
+                <div id="user-block" class="d-none">
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle text-decoration-none" type="button" id="userMenu" data-bs-toggle="dropdown">
+                            <img src="../static/img/avatars/default-avatar.png" alt="Аватар" class="rounded-circle me-2" width="32" height="32">
+                            <span id="username">Имя пользователя</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Мой профиль</a></li>
+                            <li><a class="dropdown-item" href="login.html">Выйти</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="h3 mb-0">Регистрация</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-danger d-none" id="error-messages">
+                            <ul class="mb-0" id="error-list">
+                            </ul>
+                        </div>
+
+                        <form id="signup-form">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" maxlength="50" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Имя пользователя</label>
+                                <input type="text" class="form-control" id="username" name="username" maxlength="30" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" name="password" maxlength="30" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password-confirm" class="form-label">Подтверждение пароля</label>
+                                <input type="password" class="form-control" id="password-confirm" name="password-confirm" maxlength="30" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="avatar" class="form-label">Аватар (опционально)</label>
+                                <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <p>Уже есть аккаунт? <a href="login.html">Войдите</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
