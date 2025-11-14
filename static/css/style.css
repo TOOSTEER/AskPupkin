@@ -1,151 +1,207 @@
-﻿
-
-:root {
-    --primary-color: #0d6efd;
-    --secondary-color: #6c757d;
-    --success-color: #198754;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #0dcaf0;
-    --light-color: #f8f9fa;
-    --dark-color: #212529;
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
 }
 
-.navbar-brand img {
-    margin-right: 10px;
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.card {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    border: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.card-header {
-    background-color: rgba(0, 0, 0, 0.03);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.question-item, .answer-item {
-    transition: transform 0.2s;
-}
-
-    .question-item:hover, .answer-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 1rem;
     }
 
-.vote-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.vote-count {
-    font-size: 1.25rem;
-}
-
-.tag-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.tag {
-    display: inline-block;
-    padding: 4px 8px;
-    background-color: var(--primary-color);
-    color: white;
+.auth-links a {
+    background-color: #3498db;
+    padding: 0.5rem 1rem;
     border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.2s;
 }
 
-    .tag:hover {
-        background-color: #0b5ed7;
-        color: white;
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.questions-header {
+    margin-bottom: 2rem;
+}
+
+.question-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.question-rating {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3498db;
+    margin-right: 1rem;
+    min-width: 60px;
+    text-align: center;
+}
+
+.question-content {
+    flex: 1;
+}
+
+.question-title {
+    margin: 0 0 0.5rem 0;
+}
+
+    .question-title a {
+        color: #2c3e50;
         text-decoration: none;
     }
 
-.tag-lg {
-    font-size: 1.1rem;
+        .question-title a:hover {
+            color: #3498db;
+        }
+
+.question-excerpt {
+    color: #666;
+    margin-bottom: 0.5rem;
 }
 
-.tag-md {
+.question-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.9rem;
+    color: #888;
 }
 
-.tag-sm {
-    font-size: 0.8rem;
+.tag {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-right: 0.5rem;
 }
 
-.pagination .page-link {
-    color: var(--primary-color);
-}
-
-.pagination .page-item.active .page-link {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
-.rounded-circle {
-    object-fit: cover;
-}
-
-.correct-answer .btn {
-    font-size: 0.8rem;
-    padding: 2px 6px;
-}
-
-@media (max-width: 768px) {
-    .vote-buttons {
-        flex-direction: row;
-        justify-content: center;
-        margin-bottom: 10px;
+    .tag:hover {
+        background-color: #bdc3c7;
     }
 
-    .vote-count {
-        margin: 0 10px;
-    }
-
-    .question-item .col-2,
-    .answer-item .col-2 {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .question-item .col-10,
-    .answer-item .col-10 {
-        width: 100%;
-    }
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
 }
 
-pre {
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 0.25rem;
+    .pagination a, .pagination span {
+        padding: 0.5rem 1rem;
+        margin: 0 0.2rem;
+        border: 1px solid #ddd;
+        text-decoration: none;
+        color: #3498db;
+    }
+
+    .pagination .current {
+        background-color: #3498db;
+        color: white;
+        border-color: #3498db;
+    }
+
+.question-detail {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.answer-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     padding: 1rem;
-    overflow-x: auto;
+    margin-bottom: 1rem;
+    display: flex;
 }
 
-code {
-    color: #d63384;
-    background-color: #f8f9fa;
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.2rem;
+.answer-rating {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #27ae60;
+    margin-right: 1rem;
+    min-width: 50px;
+    text-align: center;
 }
 
-.answer-item.correct {
-    border-left: 4px solid var(--success-color);
+.correct-answer {
+    color: #27ae60;
+    font-weight: bold;
 }
+
+.your-answer {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+    .your-answer textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+.login-form, .signup-form, .ask-form {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+    .login-form input, .signup-form input, .ask-form input, .ask-form textarea {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .ask-form textarea {
+        height: 200px;
+        resize: vertical;
+    }
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #2980b9;
+    }

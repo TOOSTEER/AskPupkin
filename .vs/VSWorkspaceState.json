@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app"
+    "\\app",
+    "\\app\\managment",
+    "\\app\\managment\\commands",
+    "\\ask_pupkin"
   ],
+  "SelectedNode": "\\reset_and_fill.py",
   "PreviewInSolutionExplorer": false
 }

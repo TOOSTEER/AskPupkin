@@ -3,95 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}AskPupkin{% endblock %}</title>
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/css/style.css" rel="stylesheet">
+    <title>AskPupkin - {% block title %}{% endblock %}</title>
+    <link href="/static/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="../static/img/logo.png" alt="AskPupkin" height="30">
-            </a>
-
-            <form class="d-flex mx-3 flex-grow-1" action="index.html" method="get">
-                <input class="form-control me-2" type="search" placeholder="Поиск..." name="q">
-                <button class="btn btn-outline-success" type="submit">Найти</button>
-            </form>
-
-            <div class="d-flex align-items-center">
-                <div id="auth-buttons">
-                    <a href="login.html" class="btn btn-outline-primary me-2">Войти</a>
-                    <a href="signup.html" class="btn btn-primary">Регистрация</a>
-                </div>
-                <div id="user-block" class="d-none">
-                    <div class="dropdown">
-                        <button class="btn btn-link dropdown-toggle text-decoration-none" type="button" id="userMenu" data-bs-toggle="dropdown">
-                            <img src="../static/img/avatars/default-avatar.png" alt="Аватар" class="rounded-circle me-2" width="32" height="32">
-                            <span id="username">Имя пользователя</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Мой профиль</a></li>
-                            <li><a class="dropdown-item" href="login.html">Выйти</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <header>
+        <nav>
+            <a href="{% url 'index' %}">Новые вопросы</a>
+            <a href="{% url 'hot' %}">Популярные вопросы</a>
+            <a href="{% url 'ask' %}">Задать вопрос</a>
+            <div class="auth-links">
+                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'signup' %}">Зарегистрироваться</a>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <div class="container mt-4">
-        <div class="row">
-            <main class="col-md-9">
-                {% block content %}{% endblock %}
-            </main>
-
-            <aside class="col-md-3">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Популярные теги</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="tag-cloud">
-                            <a href="#" class="tag tag-lg">Python</a>
-                            <a href="#" class="tag tag-md">Django</a>
-                            <a href="#" class="tag tag-sm">MySQL</a>
-                            <a href="#" class="tag tag-lg">JavaScript</a>
-                            <a href="#" class="tag tag-md">HTML</a>
-                            <a href="#" class="tag tag-sm">CSS</a>
-                            <a href="#" class="tag tag-md">Bootstrap</a>
-                            <a href="#" class="tag tag-sm">Git</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Лучшие пользователи</h5>
-                    </div>
-                    <div class="card-body">
-                        <ol class="list-unstyled mb-0">
-                            <li class="mb-2">
-                                <img src="../static/img/avatars/default-avatar.png" alt="Аватар" class="rounded-circle me-2" width="24" height="24">
-                                <a href="#">user1</a>
-                            </li>
-                            <li class="mb-2">
-                                <img src="../static/img/avatars/default-avatar.png" alt="Аватар" class="rounded-circle me-2" width="24" height="24">
-                                <a href="#">user2</a>
-                            </li>
-                            <li class="mb-2">
-                                <img src="../static/img/avatars/default-avatar.png" alt="Аватар" class="rounded-circle me-2" width="24" height="24">
-                                <a href="#">user3</a>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </aside>
-        </div>
-    </div>
-
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/script.js"></script>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>

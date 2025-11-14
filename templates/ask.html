@@ -1,90 +1,15 @@
-﻿<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задать вопрос - AskPupkin</title>
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/css/style.css" rel="stylesheet">
-</head>
-<body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="../static/img/logo.png" alt="AskPupkin" height="30">
-            </a>
+﻿{% extends 'base.html' %}
 
-            <form class="d-flex mx-3 flex-grow-1" action="index.html" method="get">
-                <input class="form-control me-2" type="search" placeholder="Поиск..." name="q">
-                <button class="btn btn-outline-success" type="submit">Найти</button>
-            </form>
+{% block title %}Задать вопрос{% endblock %}
 
-            <div class="d-flex align-items-center">
-                <div id="auth-buttons">
-                    <a href="login.html" class="btn btn-outline-primary me-2">Войти</a>
-                    <a href="signup.html" class="btn btn-primary">Регистрация</a>
-                </div>
-                <div id="user-block" class="d-none">
-                    <div class="dropdown">
-                        <button class="btn btn-link dropdown-toggle text-decoration-none" type="button" id="userMenu" data-bs-toggle="dropdown">
-                            <img src="../static/img/avatars/default-avatar.png" alt="Аватар" class="rounded-circle me-2" width="32" height="32">
-                            <span id="username">Имя пользователя</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Мой профиль</a></li>
-                            <li><a class="dropdown-item" href="login.html">Выйти</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h1 class="h3 mb-0">Задать вопрос</h1>
-                    </div>
-                    <div class="card-body">
-                        <div class="alert alert-danger d-none" id="error-messages">
-                            <ul class="mb-0" id="error-list">
-                            </ul>
-                        </div>
-
-                        <form id="ask-form">
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Заголовок</label>
-                                <input type="text" class="form-control" id="title" name="title" maxlength="100" required>
-                                <div class="form-text">Кратко опишите суть вашего вопроса (максимум 100 символов).</div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="text" class="form-label">Текст вопроса</label>
-                                <textarea class="form-control" id="text" name="text" rows="8" required></textarea>
-                                <div class="form-text">Опишите вашу проблему подробно. Чем больше деталей, тем лучше.</div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="tags" class="form-label">Теги</label>
-                                <input type="text" class="form-control" id="tags" name="tags" placeholder="python, django, mysql" required>
-                                <div class="form-text">Введите до 3 тегов через запятую, которые характеризуют ваш вопрос.</div>
-                            </div>
-
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="index.html" class="btn btn-secondary me-md-2">Отмена</a>
-                                <button type="submit" class="btn btn-primary">Задать вопрос</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/script.js"></script>
-</body>
-</html>
+{% block content %}
+<div class="ask-form">
+    <h1>Задать вопрос</h1>
+    <form>
+        <input type="text" placeholder="Заголовок вопроса">
+        <textarea placeholder="Подробное описание вопроса"></textarea>
+        <input type="text" placeholder="Теги (через запятую)">
+        <button type="submit">Опубликовать вопрос</button>
+    </form>
+</div>
+{% endblock %}
