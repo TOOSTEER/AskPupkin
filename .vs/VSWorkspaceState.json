@@ -4,8 +4,9 @@
     "\\app",
     "\\app\\managment",
     "\\app\\managment\\commands",
+    "\\app\\migrations",
     "\\ask_pupkin"
   ],
-  "SelectedNode": "\\reset_and_fill.py",
+  "SelectedNode": "\\app\\migrations\\0001_initial.py",
   "PreviewInSolutionExplorer": false
 }

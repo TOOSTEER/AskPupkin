@@ -14,7 +14,7 @@
         <h3><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></h3>
         <p>{{ question.content|truncatewords:30 }}</p>
         <div class="question-meta">
-            <span class="answers">{{ question.answers.count }} ответов</span>
+            <span class="answers">{{ question.answers_count }} answers</span>
             {% for tag in question.tags.all %}
             <a href="{% url 'tag' tag.name %}" class="tag">{{ tag.name }}</a>
             {% endfor %}
