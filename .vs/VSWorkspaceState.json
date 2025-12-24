@@ -5,7 +5,9 @@
     "\\questions",
     "\\questions\\managment",
     "\\questions\\managment\\commands",
-    "\\questions\\migrations"
+    "\\questions\\migrations",
+    "\\static",
+    "\\static\\js"
   ],
   "SelectedNode": "\\ask_pupkin\\settings.py",
   "PreviewInSolutionExplorer": false

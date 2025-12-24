@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ask_pupkin\\settings.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ask_pupkin\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\ask.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:templates\\ask.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\signup.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:templates\\signup.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:templates\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\static\\js\\main.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:static\\js\\main.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -29,6 +29,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\forms.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:questions\\forms.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:questions\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\signup.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:templates\\signup.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:templates\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\migrations\\0001_initial.py||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -63,10 +75,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:questions\\apps.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ask_pupkin\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\tag.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:templates\\tag.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -85,10 +93,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\admin.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:questions\\admin.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:questions\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,19 +102,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "urls.py",
-              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\urls.py",
-              "RelativeDocumentMoniker": "questions\\urls.py",
-              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\urls.py",
-              "RelativeToolTip": "questions\\urls.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2025-12-24T05:39:09.851Z",
+              "DocumentIndex": 3,
+              "Title": "main.json",
+              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\static\\js\\main.json",
+              "RelativeDocumentMoniker": "static\\js\\main.json",
+              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\static\\js\\main.json",
+              "RelativeToolTip": "static\\js\\main.json",
+              "ViewState": "AgIAAMEAAAAAAAAAAAAswNgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-24T06:03:12.283Z",
               "EditorCaption": ""
             },
             {
@@ -121,52 +125,14 @@
               "RelativeDocumentMoniker": "questions\\forms.py",
               "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\forms.py",
               "RelativeToolTip": "questions\\forms.py",
-              "ViewState": "AgIAAJwAAAAAAAAAAAAswNoAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAO0AAAAAAAAAAAAgwAIBAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-12-24T05:37:42.366Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "0001_initial.py",
-              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\migrations\\0001_initial.py",
-              "RelativeDocumentMoniker": "questions\\migrations\\0001_initial.py",
-              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\migrations\\0001_initial.py",
-              "RelativeToolTip": "questions\\migrations\\0001_initial.py",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAgwHQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2025-12-24T05:27:10.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "manage.py",
-              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\manage.py",
-              "RelativeDocumentMoniker": "manage.py",
-              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\manage.py",
-              "RelativeToolTip": "manage.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2025-12-24T05:25:37.478Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "signup.html",
-              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\signup.html",
-              "RelativeDocumentMoniker": "templates\\signup.html",
-              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\signup.html",
-              "RelativeToolTip": "templates\\signup.html",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAkwHAAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-12-24T05:23:27.786Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "login.html",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\login.html",
               "RelativeDocumentMoniker": "templates\\login.html",
@@ -174,8 +140,7 @@
               "RelativeToolTip": "templates\\login.html",
               "ViewState": "AgIAAC8AAAAAAAAAAAAkwEcAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-12-24T05:23:10.769Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-24T05:23:10.769Z"
             },
             {
               "$type": "Document",
@@ -185,14 +150,14 @@
               "RelativeDocumentMoniker": "ask_pupkin\\settings.py",
               "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\settings.py",
               "RelativeToolTip": "ask_pupkin\\settings.py",
-              "ViewState": "AgIAAHQAAAAAAAAAAAAAAP0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAANYAAAAAAAAAAAAswAIBAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-12-23T22:54:16.252Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "wsgi.py",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\wsgi.py",
               "RelativeDocumentMoniker": "ask_pupkin\\wsgi.py",
@@ -204,20 +169,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ask.html",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\ask.html",
               "RelativeDocumentMoniker": "templates\\ask.html",
               "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\ask.html",
               "RelativeToolTip": "templates\\ask.html",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAkwIQAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAkwHkAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-12-24T05:22:54.175Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "question.html",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\question.html",
               "RelativeDocumentMoniker": "templates\\question.html",
@@ -229,7 +194,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 1,
+              "Title": "urls.py",
+              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\urls.py",
+              "RelativeDocumentMoniker": "ask_pupkin\\urls.py",
+              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\urls.py",
+              "RelativeToolTip": "ask_pupkin\\urls.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-12-24T05:19:07.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "signup.html",
+              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\signup.html",
+              "RelativeDocumentMoniker": "templates\\signup.html",
+              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\signup.html",
+              "RelativeToolTip": "templates\\signup.html",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAkwHAAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-12-24T05:23:27.786Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "hot.html",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\hot.html",
               "RelativeDocumentMoniker": "templates\\hot.html",
@@ -241,20 +231,70 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "models.py",
+              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\models.py",
+              "RelativeDocumentMoniker": "questions\\models.py",
+              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\models.py",
+              "RelativeToolTip": "questions\\models.py",
+              "ViewState": "AgIAALsAAAAAAAAAAAAAAMQAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-12-23T22:54:33.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
               "Title": "views.py",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\views.py",
               "RelativeDocumentMoniker": "questions\\views.py",
               "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\views.py",
               "RelativeToolTip": "questions\\views.py",
-              "ViewState": "AgIAADwBAAAAAAAAAAAswFMBAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAH0BAAAAAAAAAAAAAI8BAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-12-23T22:55:38.824Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
+              "Title": "urls.py",
+              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\urls.py",
+              "RelativeDocumentMoniker": "questions\\urls.py",
+              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\urls.py",
+              "RelativeToolTip": "questions\\urls.py",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-12-24T05:39:09.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "manage.py",
+              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\manage.py",
+              "RelativeDocumentMoniker": "manage.py",
+              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\manage.py",
+              "RelativeToolTip": "manage.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-12-24T05:25:37.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "0001_initial.py",
+              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\migrations\\0001_initial.py",
+              "RelativeDocumentMoniker": "questions\\migrations\\0001_initial.py",
+              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\migrations\\0001_initial.py",
+              "RelativeToolTip": "questions\\migrations\\0001_initial.py",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAgwHQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-12-24T05:27:10.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "asgi.py",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\asgi.py",
               "RelativeDocumentMoniker": "ask_pupkin\\asgi.py",
@@ -266,7 +306,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\index.html",
               "RelativeDocumentMoniker": "templates\\index.html",
@@ -278,7 +318,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "apps.py",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\apps.py",
               "RelativeDocumentMoniker": "questions\\apps.py",
@@ -290,19 +330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "urls.py",
-              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\urls.py",
-              "RelativeDocumentMoniker": "ask_pupkin\\urls.py",
-              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\ask_pupkin\\urls.py",
-              "RelativeToolTip": "ask_pupkin\\urls.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2025-12-24T05:19:07.017Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "tag.html",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\tag.html",
               "RelativeDocumentMoniker": "templates\\tag.html",
@@ -314,7 +342,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "base.html",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\templates\\base.html",
               "RelativeDocumentMoniker": "templates\\base.html",
@@ -326,7 +354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "style.css",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\static\\css\\style.css",
               "RelativeDocumentMoniker": "static\\css\\style.css",
@@ -338,7 +366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "fill_db.py",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\managment\\commands\\fill_db.py",
               "RelativeDocumentMoniker": "questions\\managment\\commands\\fill_db.py",
@@ -350,7 +378,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "admin.py",
               "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\admin.py",
               "RelativeDocumentMoniker": "questions\\admin.py",
@@ -359,18 +387,6 @@
               "ViewState": "AgIAABMAAAAAAAAAAAAswCoAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-12-23T22:55:01.073Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "models.py",
-              "DocumentMoniker": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\models.py",
-              "RelativeDocumentMoniker": "questions\\models.py",
-              "ToolTip": "C:\\Users\\egorp\\OneDrive\\Desktop\\ask_pupkin\\questions\\models.py",
-              "RelativeToolTip": "questions\\models.py",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAswKYAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2025-12-23T22:54:33.865Z"
             }
           ]
         }

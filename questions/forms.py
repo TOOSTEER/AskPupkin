@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 from .models import Question, Answer, Profile, Tag
+import os
 
 class CustomAuthenticationForm(AuthenticationForm):
-    """Кастомная форма аутентификации"""
     username = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
@@ -26,7 +26,6 @@ class CustomAuthenticationForm(AuthenticationForm):
     }
 
 class UserRegistrationForm(UserCreationForm):
-    """Форма регистрации пользователя"""
     email = forms.EmailField(
         required=True,
         widget=forms.EmailInput(attrs={
@@ -75,22 +74,32 @@ class UserRegistrationForm(UserCreationForm):
         return username
 
 class ProfileForm(forms.ModelForm):
-    """Форма профиля пользователя"""
     class Meta:
         model = Profile
         fields = ['avatar']
         widgets = {
             'avatar': forms.FileInput(attrs={
                 'class': 'form-control',
-                'accept': 'image/*'
+                'accept': 'image/*',
+                'id': 'avatar-upload'
             }),
         }
         labels = {
             'avatar': 'Аватар',
         }
+    
+    def clean_avatar(self):
+        avatar = self.cleaned_data.get('avatar')
+        if avatar:
+            if avatar.size > 2 * 1024 * 1024:
+                raise ValidationError('Размер изображения не должен превышать 2MB')
+            ext = os.path.splitext(avatar.name)[1].lower()
+            valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
+            if ext not in valid_extensions:
+                raise ValidationError('Поддерживаемые форматы: JPG, JPEG, PNG, GIF')
+        return avatar
 
 class UserEditForm(forms.ModelForm):
-    """Форма редактирования пользователя"""
     email = forms.EmailField(
         required=True,
         widget=forms.EmailInput(attrs={
@@ -124,7 +133,6 @@ class UserEditForm(forms.ModelForm):
         return username
 
 class QuestionForm(forms.ModelForm):
-    """Форма добавления вопроса"""
     tags_input = forms.CharField(
         max_length=255,
         required=False,
@@ -139,7 +147,7 @@ class QuestionForm(forms.ModelForm):
     
     class Meta:
         model = Question
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'image']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -152,10 +160,16 @@ class QuestionForm(forms.ModelForm):
                 'rows': 10,
                 'maxlength': '5000'
             }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*',
+                'id': 'question-image-upload'
+            }),
         }
         labels = {
             'title': 'Заголовок',
             'content': 'Содержание',
+            'image': 'Изображение (опционально)',
         }
         help_texts = {
             'content': 'Максимальная длина: 5000 символов',
@@ -171,12 +185,22 @@ class QuestionForm(forms.ModelForm):
         if len(tags) == 0:
             raise ValidationError('Укажите хотя бы один тег')
         
-        # Проверяем длину каждого тега
         for tag in tags:
             if len(tag) > 50:
                 raise ValidationError(f'Тег "{tag}" слишком длинный (максимум 50 символов)')
         
         return tags
+    
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+        if image:
+            if image.size > 5 * 1024 * 1024:
+                raise ValidationError('Размер изображения не должен превышать 5MB')
+            ext = os.path.splitext(image.name)[1].lower()
+            valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
+            if ext not in valid_extensions:
+                raise ValidationError('Поддерживаемые форматы: JPG, JPEG, PNG, GIF')
+        return image
     
     def save(self, commit=True, author=None):
         question = super().save(commit=False)
@@ -198,10 +222,9 @@ class QuestionForm(forms.ModelForm):
         return question
 
 class AnswerForm(forms.ModelForm):
-    """Форма добавления ответа"""
     class Meta:
         model = Answer
-        fields = ['content']
+        fields = ['content', 'image']
         widgets = {
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
@@ -210,10 +233,27 @@ class AnswerForm(forms.ModelForm):
                 'maxlength': '3000',
                 'id': 'answer-content'
             }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*',
+                'id': 'answer-image-upload'
+            }),
         }
         labels = {
             'content': 'Ответ',
+            'image': 'Изображение (опционально)',
         }
         help_texts = {
             'content': 'Максимальная длина: 3000 символов',
         }
+    
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+        if image:
+            if image.size > 5 * 1024 * 1024:
+                raise ValidationError('Размер изображения не должен превышать 5MB')
+            ext = os.path.splitext(image.name)[1].lower()
+            valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
+            if ext not in valid_extensions:
+                raise ValidationError('Поддерживаемые форматы: JPG, JPEG, PNG, GIF')
+        return image

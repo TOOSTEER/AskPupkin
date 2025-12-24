@@ -17,7 +17,7 @@
                 {% endfor %}
                 {% endif %}
 
-                <form method="post" novalidate>
+                <form method="post" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
 
                     {% if form.non_field_errors %}
@@ -54,6 +54,22 @@
                         <div class="form-text">{{ form.content.help_text }}</div>
                     </div>
 
+                    <div class="mb-3">
+                        {{ form.image.label_tag }}
+                        {{ form.image }}
+                        {% if form.image.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.image.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-text">Максимальный размер: 5MB. Поддерживаемые форматы: JPG, PNG, GIF</div>
+                        <div id="question-image-preview-container" class="mt-2" style="display: none;">
+                            <img id="question-image-preview" class="img-thumbnail" style="max-width: 300px;">
+                        </div>
+                    </div>
+
                     <div class="mb-4">
                         {{ form.tags_input.label_tag }}
                         {{ form.tags_input }}
@@ -76,58 +92,31 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
 {% block extra_js %}
+<script src="{% static 'js/image_upload.js' %}"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Подсказки для тегов
-    const tagsInput = document.getElementById('tags-input');
-    const tagsList = document.getElementById('tags-suggestions');
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageInput = document.getElementById('question-image-upload');
+        const previewContainer = document.getElementById('question-image-preview-container');
+        const preview = document.getElementById('question-image-preview');
 
-    if (tagsInput && tagsList) {
-        tagsInput.addEventListener('input', function() {
-            const query = this.value.trim();
-            if (query.length > 1) {
-                fetch(`/api/tags/suggest/?q=${encodeURIComponent(query)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        tagsList.innerHTML = '';
-                        data.tags.forEach(tag => {
-                            const li = document.createElement('li');
-                            li.className = 'list-group-item list-group-item-action';
-                            li.textContent = tag;
-                            li.addEventListener('click', () => {
-                                addTag(tag);
-                            });
-                            tagsList.appendChild(li);
-                        });
-                        tagsList.style.display = 'block';
-                    });
-            } else {
-                tagsList.style.display = 'none';
-            }
-        });
-
-        // Скрыть подсказки при клике вне
-        document.addEventListener('click', function(e) {
-            if (!tagsInput.contains(e.target) && !tagsList.contains(e.target)) {
-                tagsList.style.display = 'none';
-            }
-        });
-    }
-
-    function addTag(tag) {
-        const currentTags = tagsInput.value.split(',').map(t => t.trim()).filter(t => t);
-        if (!currentTags.includes(tag) && currentTags.length < 3) {
-            if (currentTags.length > 0) {
-                tagsInput.value += ', ' + tag;
-            } else {
-                tagsInput.value = tag;
-            }
+        if (imageInput && preview) {
+            imageInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                        previewContainer.style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    previewContainer.style.display = 'none';
+                }
+            });
         }
-        tagsList.style.display = 'none';
-    }
-});
+    });
 </script>
-{% endblock %}
 {% endblock %}

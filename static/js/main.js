@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Р›Р°Р№РєРё РґР»СЏ РІРѕРїСЂРѕСЃРѕРІ
+document.addEventListener('DOMContentLoaded', function () {
+    // Лайки для вопросов
     document.querySelectorAll('.like-btn[data-question-id]').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const questionId = this.dataset.questionId;
             const value = this.dataset.value;
-            
+
             if (!questionId || !value) return;
-            
+
             fetch(`/api/question/${questionId}/like/`, {
                 method: 'POST',
                 headers: {
@@ -15,40 +15,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({ value: parseInt(value) })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // РћР±РЅРѕРІР»СЏРµРј СЃС‡РµС‚С‡РёРє
-                    const counter = document.querySelector(`.like-count[data-question-id="${questionId}"]`);
-                    if (counter) {
-                        counter.textContent = data.new_rating;
-                    }
-                    
-                    // РћР±РЅРѕРІР»СЏРµРј СЃС‚РёР»Рё РєРЅРѕРїРѕРє
-                    updateLikeButtons(questionId, value, 'question');
-                } else {
-                    if (data.redirect) {
-                        window.location.href = '/login/';
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Обновляем счетчик
+                        const counter = document.querySelector(`.like-count[data-question-id="${questionId}"]`);
+                        if (counter) {
+                            counter.textContent = data.new_rating;
+                        }
+
+                        // Обновляем стили кнопок
+                        updateLikeButtons(questionId, value, 'question');
                     } else {
-                        alert(data.error || 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°');
+                        if (data.redirect) {
+                            window.location.href = '/login/';
+                        } else {
+                            alert(data.error || 'Произошла ошибка');
+                        }
                     }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РѕС‚РїСЂР°РІРєРµ Р·Р°РїСЂРѕСЃР°');
-            });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Произошла ошибка при отправке запроса');
+                });
         });
     });
-    
-    // Р›Р°Р№РєРё РґР»СЏ РѕС‚РІРµС‚РѕРІ
+
+    // Лайки для ответов
     document.querySelectorAll('.like-btn[data-answer-id]').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const answerId = this.dataset.answerId;
             const value = this.dataset.value;
-            
+
             if (!answerId || !value) return;
-            
+
             fetch(`/api/answer/${answerId}/like/`, {
                 method: 'POST',
                 headers: {
@@ -57,48 +57,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({ value: parseInt(value) })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // РћР±РЅРѕРІР»СЏРµРј СЃС‡РµС‚С‡РёРє
-                    const counter = document.querySelector(`.like-count[data-answer-id="${answerId}"]`);
-                    if (counter) {
-                        counter.textContent = data.new_rating;
-                    }
-                    
-                    // РћР±РЅРѕРІР»СЏРµРј СЃС‚РёР»Рё РєРЅРѕРїРѕРє
-                    updateLikeButtons(answerId, value, 'answer');
-                } else {
-                    if (data.redirect) {
-                        window.location.href = '/login/';
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Обновляем счетчик
+                        const counter = document.querySelector(`.like-count[data-answer-id="${answerId}"]`);
+                        if (counter) {
+                            counter.textContent = data.new_rating;
+                        }
+
+                        // Обновляем стили кнопок
+                        updateLikeButtons(answerId, value, 'answer');
                     } else {
-                        alert(data.error || 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°');
+                        if (data.redirect) {
+                            window.location.href = '/login/';
+                        } else {
+                            alert(data.error || 'Произошла ошибка');
+                        }
                     }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РѕС‚РїСЂР°РІРєРµ Р·Р°РїСЂРѕСЃР°');
-            });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Произошла ошибка при отправке запроса');
+                });
         });
     });
-    
-    // РџРѕРёСЃРє СЃ Р°РІС‚РѕРґРѕРїРѕР»РЅРµРЅРёРµРј
+
+    // Поиск с автодополнением
     const searchInput = document.querySelector('input[type="search"]');
     if (searchInput) {
         let timeoutId;
-        
-        searchInput.addEventListener('input', function() {
+
+        searchInput.addEventListener('input', function () {
             clearTimeout(timeoutId);
-            
+
             timeoutId = setTimeout(() => {
                 const query = this.value.trim();
-                
+
                 if (query.length < 2) {
                     hideSuggestions();
                     return;
                 }
-                
+
                 fetch(`/api/search/?q=${encodeURIComponent(query)}`)
                     .then(response => response.json())
                     .then(data => {
@@ -109,34 +109,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
             }, 300);
         });
-        
-        // РЎРєСЂС‹С‚СЊ РїРѕРґСЃРєР°Р·РєРё РїСЂРё РєР»РёРєРµ РІРЅРµ РїРѕР»СЏ
-        document.addEventListener('click', function(event) {
+
+        // Скрыть подсказки при клике вне поля
+        document.addEventListener('click', function (event) {
             if (!event.target.closest('.search-container')) {
                 hideSuggestions();
             }
         });
     }
-    
-    // Р¤РѕСЂРјР° РґРѕР±Р°РІР»РµРЅРёСЏ РІРѕРїСЂРѕСЃР° - РѕРіСЂР°РЅРёС‡РµРЅРёРµ РґР»РёРЅС‹ С‚РµРіРѕРІ
+
+    // Форма добавления вопроса - ограничение длины тегов
     const tagsInput = document.getElementById('id_tags_input');
     if (tagsInput) {
-        tagsInput.addEventListener('input', function() {
+        tagsInput.addEventListener('input', function () {
             const tags = this.value.split(',').map(tag => tag.trim());
-            
+
             if (tags.length > 3) {
                 this.value = tags.slice(0, 3).join(', ');
                 showTagLimitWarning();
             }
         });
     }
-    
-    // Р¤СѓРЅРєС†РёРё РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ
+
+    // Функции вспомогательные
     function updateLikeButtons(id, value, type) {
-        const selector = type === 'question' ? 
-            `.like-btn[data-question-id="${id}"]` : 
+        const selector = type === 'question' ?
+            `.like-btn[data-question-id="${id}"]` :
             `.like-btn[data-answer-id="${id}"]`;
-        
+
         document.querySelectorAll(selector).forEach(btn => {
             btn.classList.remove('active');
             if (parseInt(btn.dataset.value) === parseInt(value)) {
@@ -144,62 +144,62 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     function showTagLimitWarning() {
         let warning = document.getElementById('tag-limit-warning');
         if (!warning) {
             warning = document.createElement('div');
             warning.id = 'tag-limit-warning';
             warning.className = 'alert alert-warning mt-2';
-            warning.textContent = 'РњРѕР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ РЅРµ Р±РѕР»РµРµ 3 С‚РµРіРѕРІ';
-            
+            warning.textContent = 'Можно указать не более 3 тегов';
+
             const form = tagsInput.closest('form');
             form.insertBefore(warning, tagsInput.nextElementSibling);
-            
+
             setTimeout(() => {
                 warning.remove();
             }, 3000);
         }
     }
-    
+
     function showSuggestions(suggestions, query) {
         let container = document.getElementById('search-suggestions');
         if (!container) {
             container = document.createElement('div');
             container.id = 'search-suggestions';
             container.className = 'search-suggestions';
-            
-            const searchContainer = searchInput.closest('.search-container') || 
-                                  searchInput.closest('.d-flex');
+
+            const searchContainer = searchInput.closest('.search-container') ||
+                searchInput.closest('.d-flex');
             if (searchContainer) {
                 searchContainer.style.position = 'relative';
                 searchContainer.appendChild(container);
             }
         }
-        
+
         if (suggestions.length === 0) {
-            container.innerHTML = '<div class="suggestion-item">РќРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ</div>';
+            container.innerHTML = '<div class="suggestion-item">Ничего не найдено</div>';
         } else {
-            container.innerHTML = suggestions.map(suggestion => 
+            container.innerHTML = suggestions.map(suggestion =>
                 `<a href="${suggestion.url}" class="suggestion-item">${highlightText(suggestion.text, query)}</a>`
             ).join('');
         }
-        
+
         container.style.display = 'block';
     }
-    
+
     function hideSuggestions() {
         const container = document.getElementById('search-suggestions');
         if (container) {
             container.style.display = 'none';
         }
     }
-    
+
     function highlightText(text, query) {
         const regex = new RegExp(`(${query})`, 'gi');
         return text.replace(regex, '<strong>$1</strong>');
     }
-    
+
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {

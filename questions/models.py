@@ -6,7 +6,13 @@ import datetime
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Пользователь")
-    avatar = models.ImageField(upload_to='avatars/%Y/%m/%d/', null=True, blank=True, verbose_name="Аватар")
+    avatar = models.ImageField(
+        upload_to='avatars/%Y/%m/%d/', 
+        null=True, 
+        blank=True, 
+        verbose_name="Аватар",
+        help_text="Загрузите изображение для аватара"
+    )
     
     class Meta:
         verbose_name = "Профиль"
@@ -53,6 +59,13 @@ class Question(models.Model):
     tags = models.ManyToManyField(Tag, related_name='questions', verbose_name="Теги")
     created_date = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
     rating = models.IntegerField(default=0, verbose_name="Рейтинг")
+    image = models.ImageField(
+        upload_to='question_images/%Y/%m/%d/', 
+        null=True, 
+        blank=True, 
+        verbose_name="Изображение",
+        help_text="Загрузите изображение для вопроса (опционально)"
+    )
     
     objects = QuestionManager()
     
@@ -90,6 +103,11 @@ class Question(models.Model):
     
     def get_answers_count(self):
         return self.answers.count()
+    
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return None
 
 class Answer(models.Model):
     content = models.TextField(max_length=3000, verbose_name="Содержание")
@@ -98,6 +116,13 @@ class Answer(models.Model):
     created_date = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
     rating = models.IntegerField(default=0, verbose_name="Рейтинг")
     is_correct = models.BooleanField(default=False, verbose_name="Правильный ответ")
+    image = models.ImageField(
+        upload_to='answer_images/%Y/%m/%d/', 
+        null=True, 
+        blank=True, 
+        verbose_name="Изображение",
+        help_text="Загрузите изображение для ответа (опционально)"
+    )
     
     class Meta:
         verbose_name = "Ответ"
@@ -121,6 +146,11 @@ class Answer(models.Model):
             return f'{minutes} минут назад' if minutes > 1 else 'минуту назад'
         else:
             return 'только что'
+    
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return None
 
 class QuestionLike(models.Model):
     LIKE = 1
