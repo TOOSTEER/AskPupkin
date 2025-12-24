@@ -1,49 +1,154 @@
 ﻿{% extends 'base.html' %}
 
-{% block title %}{{ question.title }}{% endblock %}
-
 {% block content %}
-<div class="question-detail">
-    <h1>{{ question.title }}</h1>
-    <div class="question-content">
-        <p>{{ question.content }}</p>
-        <div class="question-meta">
-            <span>Автор: {{ question.author.username }}</span>
-            <span>{{ question.created_date|date:"M d, Y" }}</span>
-            {% for tag in question.tags.all %}
-            <a href="{% url 'tag' tag.name %}" class="tag">{{ tag.name }}</a>
-            {% endfor %}
+<div class="question-card mb-4">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="question-stats">
+                <div class="votes">{{ question.rating }}</div>
+                <div class="text-muted small">голосов</div>
+
+                <div class="answers mt-2 {% if question.get_answers_count > 0 %}has-answer{% endif %}">
+                    {{ question.get_answers_count }}
+                </div>
+                <div class="text-muted small">ответов</div>
+            </div>
+
+            <div class="like-buttons mt-3">
+                <button class="like-btn" data-question-id="{{ question.id }}" data-value="1">
+                    <i class="bi bi-caret-up-fill"></i>
+                </button>
+                <span class="like-count">{{ question.rating }}</span>
+                <button class="like-btn dislike" data-question-id="{{ question.id }}" data-value="-1">
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="answers">
-    <h2>{{ question.answers.count }} Ответов</h2>
+        <div class="col-md-10">
+            <h1 class="question-title">{{ question.title }}</h1>
 
-    {% for answer in page_obj %}
-    <div class="answer-item">
-        <div class="answer-rating">{{ answer.rating }}</div>
-        <div class="answer-content">
-            <p>{{ answer.content }}</p>
-            <div class="answer-meta">
-                <span>Автор: {{ answer.author.username }}</span>
-                <span>{{ answer.created_date|date:"M d, Y" }}</span>
-                {% if answer.is_correct %}
-                <span class="correct-answer">✓ Правильный ответ</span>
-                {% endif %}
+            <div class="question-content mb-4">
+                {{ question.content|linebreaks }}
+            </div>
+
+            <div class="tags mb-3">
+                {% for tag in question.tags.all %}
+                <a href="{% url 'tag' tag.name %}" class="tag">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="question-meta">
+                <span class="text-muted">{{ question.time_since_created }}</span>
+                <a href="#" class="ms-2">
+                    {% if question.author.profile.avatar %}
+                    <img src="{{ question.author.profile.avatar.url }}" alt="Аватар" class="avatar-sm">
+                    {% else %}
+                    <img src="/static/img/default-avatar.png" alt="Аватар" class="avatar-sm">
+                    {% endif %}
+                    {{ question.author.username }}
+                </a>
             </div>
         </div>
     </div>
-    {% endfor %}
 </div>
 
-{% include 'pagination.html' %}
+<!-- Ответы -->
+<h3 class="mb-4">{{ answers.paginator.count }} ответов</h3>
 
-<div class="your-answer">
-    <h2>Ваш ответ</h2>
-    <form>
-        <textarea placeholder="Введите ваш ответ здесь..."></textarea>
-        <button type="submit">Опубликовать ответ</button>
-    </form>
+{% for answer in answers %}
+<div class="answer {% if answer.is_correct %}correct{% endif %}">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="answer-stats">
+                <div class="votes">{{ answer.rating }}</div>
+                <div class="text-muted small">голосов</div>
+            </div>
+
+            <div class="like-buttons mt-3">
+                <button class="like-btn" data-answer-id="{{ answer.id }}" data-value="1">
+                    <i class="bi bi-caret-up-fill"></i>
+                </button>
+                <span class="like-count">{{ answer.rating }}</span>
+                <button class="like-btn dislike" data-answer-id="{{ answer.id }}" data-value="-1">
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+            </div>
+
+            {% if answer.is_correct %}
+            <div class="correct-badge mt-2">✓ Правильный ответ</div>
+            {% endif %}
+
+            {% if question.author == user and not answer.is_correct %}
+            <form method="post" action="{% url 'mark_correct' answer.id %}" class="mt-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-success">Отметить правильным</button>
+            </form>
+            {% endif %}
+        </div>
+
+        <div class="col-md-10">
+            <div class="answer-content mb-3">
+                {{ answer.content|linebreaks }}
+            </div>
+
+            <div class="answer-meta">
+                <span class="text-muted">{{ answer.time_since_created }}</span>
+                <a href="#" class="ms-2">
+                    {% if answer.author.profile.avatar %}
+                    <img src="{{ answer.author.profile.avatar.url }}" alt="Аватар" class="avatar-sm">
+                    {% else %}
+                    <img src="/static/img/default-avatar.png" alt="Аватар" class="avatar-sm">
+                    {% endif %}
+                    {{ answer.author.username }}
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+{% empty %}
+<div class="alert alert-info">
+    Пока нет ответов на этот вопрос. Будьте первым, кто ответит!
+</div>
+{% endfor %}
+
+<!-- Пагинация ответов -->
+{% if answers.paginator.num_pages > 1 %}
+    {% include 'pagination.html' with page=answers %}
+{% endif %}
+
+<!-- Форма добавления ответа -->
+{% if user.is_authenticated %}
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>Ваш ответ</h4>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="mb-3">
+                {{ form.content }}
+                <div class="form-text">Максимальная длина ответа: 3000 символов</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ответить</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning mt-4">
+    Чтобы оставить ответ, пожалуйста, <a href="{% url 'login' %}">войдите</a> или <a href="{% url 'signup' %}">зарегистрируйтесь</a>.
+</div>
+{% endif %}
 {% endblock %}

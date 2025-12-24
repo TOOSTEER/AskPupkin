@@ -1,15 +1,46 @@
 ﻿{% extends 'base.html' %}
 
-{% block title %}Задать вопрос{% endblock %}
-
 {% block content %}
-<div class="ask-form">
-    <h1>Задать вопрос</h1>
-    <form>
-        <input type="text" placeholder="Заголовок вопроса">
-        <textarea placeholder="Подробное описание вопроса"></textarea>
-        <input type="text" placeholder="Теги (через запятую)">
-        <button type="submit">Опубликовать вопрос</button>
-    </form>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Задать вопрос</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <p><strong>{{ field }}:</strong> {{ error }}</p>
+                {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Заголовок</label>
+                {{ form.title }}
+                <div class="form-text">Кратко опишите суть вопроса</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_content" class="form-label">Содержание</label>
+                {{ form.content }}
+                <div class="form-text">Опишите проблему подробно. Максимальная длина: 5000 символов</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_tags_input" class="form-label">Теги</label>
+                {{ form.tags_input }}
+                <div class="form-text">Введите до 3 тегов через запятую</div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'index' %}" class="btn btn-secondary me-md-2">Отмена</a>
+                <button type="submit" class="btn btn-primary">Задать вопрос</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

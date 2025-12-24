@@ -1,12 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\managment",
-    "\\app\\managment\\commands",
-    "\\app\\migrations",
-    "\\ask_pupkin"
+    "\\ask_pupkin",
+    "\\questions",
+    "\\questions\\managment",
+    "\\questions\\managment\\commands",
+    "\\questions\\migrations"
   ],
-  "SelectedNode": "\\app\\migrations\\0001_initial.py",
+  "SelectedNode": "\\questions\\migrations\\0001_initial.py",
   "PreviewInSolutionExplorer": false
 }

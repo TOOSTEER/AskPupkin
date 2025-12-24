@@ -1,27 +1,59 @@
 ﻿{% extends 'base.html' %}
 
-{% block title %}{{ title }}{% endblock %}
-
 {% block content %}
-<div class="questions-header">
-    <h1>{{ title }}</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Вопросы с тегом: {{ tag.name }}</h2>
+    <a href="{% url 'ask' %}" class="btn btn-primary">Задать вопрос</a>
 </div>
 
-{% for question in page_obj %}
-<div class="question-item">
-    <div class="question-rating">{{ question.rating }}</div>
-    <div class="question-content">
-        <h3><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></h3>
-        <p>{{ question.content|truncatewords:30 }}</p>
-        <div class="question-meta">
-            <span class="answers">{{ question.answers_count }} answers</span>
-            {% for tag in question.tags.all %}
-            <a href="{% url 'tag' tag.name %}" class="tag">{{ tag.name }}</a>
-            {% endfor %}
+{% if questions %}
+    {% for question in questions %}
+<div class="question-card">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="question-stats">
+                <div class="votes">{{ question.rating }}</div>
+                <div class="text-muted small">голосов</div>
+                <div class="answers mt-2 {% if question.get_answers_count > 0 %}has-answer{% endif %}">
+                    {{ question.get_answers_count }}
+                </div>
+                <div class="text-muted small">ответов</div>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <h3 class="question-title">
+                <a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+            </h3>
+
+            <p class="question-preview">{{ question.content|truncatewords:50 }}</p>
+
+            <div class="tags">
+                {% for tag in question.tags.all %}
+                <a href="{% url 'tag' tag.name %}" class="tag">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="question-meta mt-2">
+                <span class="text-muted">{{ question.time_since_created }}</span>
+                <a href="#" class="ms-2">
+                    {% if question.author.profile.avatar %}
+                    <img src="{{ question.author.profile.avatar.url }}" alt="Аватар" class="avatar-sm">
+                    {% else %}
+                    <img src="/static/img/default-avatar.png" alt="Аватар" class="avatar-sm">
+                    {% endif %}
+                    {{ question.author.username }}
+                </a>
+            </div>
         </div>
     </div>
 </div>
-{% endfor %}
+    {% endfor %}
 
-{% include 'pagination.html' %}
+    {% include 'pagination.html' with page=questions %}
+{% else %}
+<div class="alert alert-info">
+    Пока нет вопросов с тегом "{{ tag.name }}"
+</div>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,48 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Мой профиль</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if user_form.errors or profile_form.errors %}
+            <div class="alert alert-danger">
+                {% for field, errors in user_form.errors.items %}
+                {% for error in errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% endfor %}
+                {% for field, errors in profile_form.errors.items %}
+                {% for error in errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Имя пользователя</label>
+                {{ user_form.username }}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Email</label>
+                {{ user_form.email }}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_avatar" class="form-label">Аватар</label>
+                {{ profile_form.avatar }}
+                {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" alt="Текущий аватар" class="mt-2" width="100">
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
