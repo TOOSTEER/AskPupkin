@@ -1,11 +1,12 @@
 ﻿{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-7">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h2 class="mb-0">Регистрация</h2>
+                <h2 class="mb-0">Редактирование профиля</h2>
             </div>
             <div class="card-body">
                 {% if messages %}
@@ -22,7 +23,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="mb-3">Учетные данные</h4>
+                            <h4 class="mb-3">Основная информация</h4>
 
                             <div class="mb-3">
                                 {{ user_form.username.label_tag }}
@@ -51,61 +52,38 @@
                         </div>
 
                         <div class="col-md-6">
-                            <h4 class="mb-3">Пароль</h4>
+                            <h4 class="mb-3">Аватар</h4>
 
                             <div class="mb-3">
-                                {{ user_form.password1.label_tag }}
-                                {{ user_form.password1 }}
-                                {% if user_form.password1.errors %}
+                                {% if user.profile.avatar %}
+                                <div class="mb-2">
+                                    <p>Текущий аватар:</p>
+                                    <img src="{{ user.profile.avatar.url }}"
+                                         alt="Аватар {{ user.username }}"
+                                         class="img-thumbnail"
+                                         width="150">
+                                </div>
+                                {% endif %}
+
+                                {{ profile_form.avatar.label_tag }}
+                                {{ profile_form.avatar }}
+                                {% if profile_form.avatar.errors %}
                                 <div class="invalid-feedback d-block">
-                                    {% for error in user_form.password1.errors %}
+                                    {% for error in profile_form.avatar.errors %}
                                     {{ error }}
                                     {% endfor %}
                                 </div>
                                 {% endif %}
-                                <div class="form-text">{{ user_form.password1.help_text }}</div>
-                            </div>
-
-                            <div class="mb-3">
-                                {{ user_form.password2.label_tag }}
-                                {{ user_form.password2 }}
-                                {% if user_form.password2.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {% for error in user_form.password2.errors %}
-                                    {{ error }}
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
+                                <div class="form-text">{{ profile_form.avatar.help_text }}</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-4">
-                        <h4 class="mb-3">Аватар (необязательно)</h4>
-                        {{ profile_form.avatar.label_tag }}
-                        {{ profile_form.avatar }}
-                        {% if profile_form.avatar.errors %}
-                        <div class="invalid-feedback d-block">
-                            {% for error in profile_form.avatar.errors %}
-                            {{ error }}
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                        <div class="form-text">{{ profile_form.avatar.help_text }}</div>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                        <a href="{% url 'index' %}" class="btn btn-secondary">Отмена</a>
-                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'profile' %}" class="btn btn-secondary">Назад к профилю</a>
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
                     </div>
                 </form>
-
-                <hr class="my-4">
-
-                <div class="text-center">
-                    <p>Уже есть аккаунт?</p>
-                    <a href="{% url 'login' %}" class="btn btn-outline-primary">Войти</a>
-                </div>
             </div>
         </div>
     </div>

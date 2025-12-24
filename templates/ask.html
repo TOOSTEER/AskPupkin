@@ -2,45 +2,132 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <h2 class="mb-4">Задать вопрос</h2>
-
-        <form method="post">
-            {% csrf_token %}
-
-            {% if form.errors %}
-            <div class="alert alert-danger">
-                {% for field, errors in form.errors.items %}
-                {% for error in errors %}
-                <p><strong>{{ field }}:</strong> {{ error }}</p>
+    <div class="col-md-10 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Задать вопрос</h2>
+            </div>
+            <div class="card-body">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 {% endfor %}
-                {% endfor %}
-            </div>
-            {% endif %}
+                {% endif %}
 
-            <div class="mb-3">
-                <label for="id_title" class="form-label">Заголовок</label>
-                {{ form.title }}
-                <div class="form-text">Кратко опишите суть вопроса</div>
-            </div>
+                <form method="post" novalidate>
+                    {% csrf_token %}
 
-            <div class="mb-3">
-                <label for="id_content" class="form-label">Содержание</label>
-                {{ form.content }}
-                <div class="form-text">Опишите проблему подробно. Максимальная длина: 5000 символов</div>
-            </div>
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
 
-            <div class="mb-3">
-                <label for="id_tags_input" class="form-label">Теги</label>
-                {{ form.tags_input }}
-                <div class="form-text">Введите до 3 тегов через запятую</div>
-            </div>
+                    <div class="mb-3">
+                        {{ form.title.label_tag }}
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.title.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-text">{{ form.title.help_text }}</div>
+                    </div>
 
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="{% url 'index' %}" class="btn btn-secondary me-md-2">Отмена</a>
-                <button type="submit" class="btn btn-primary">Задать вопрос</button>
+                    <div class="mb-3">
+                        {{ form.content.label_tag }}
+                        {{ form.content }}
+                        {% if form.content.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.content.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-text">{{ form.content.help_text }}</div>
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form.tags_input.label_tag }}
+                        {{ form.tags_input }}
+                        {% if form.tags_input.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.tags_input.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-text">{{ form.tags_input.help_text }}</div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'index' %}" class="btn btn-secondary">Отмена</a>
+                        <button type="submit" class="btn btn-primary">Задать вопрос</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Подсказки для тегов
+    const tagsInput = document.getElementById('tags-input');
+    const tagsList = document.getElementById('tags-suggestions');
+
+    if (tagsInput && tagsList) {
+        tagsInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            if (query.length > 1) {
+                fetch(`/api/tags/suggest/?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        tagsList.innerHTML = '';
+                        data.tags.forEach(tag => {
+                            const li = document.createElement('li');
+                            li.className = 'list-group-item list-group-item-action';
+                            li.textContent = tag;
+                            li.addEventListener('click', () => {
+                                addTag(tag);
+                            });
+                            tagsList.appendChild(li);
+                        });
+                        tagsList.style.display = 'block';
+                    });
+            } else {
+                tagsList.style.display = 'none';
+            }
+        });
+
+        // Скрыть подсказки при клике вне
+        document.addEventListener('click', function(e) {
+            if (!tagsInput.contains(e.target) && !tagsList.contains(e.target)) {
+                tagsList.style.display = 'none';
+            }
+        });
+    }
+
+    function addTag(tag) {
+        const currentTags = tagsInput.value.split(',').map(t => t.trim()).filter(t => t);
+        if (!currentTags.includes(tag) && currentTags.length < 3) {
+            if (currentTags.length > 0) {
+                tagsInput.value += ', ' + tag;
+            } else {
+                tagsInput.value = tag;
+            }
+        }
+        tagsList.style.display = 'none';
+    }
+});
+</script>
+{% endblock %}
 {% endblock %}
