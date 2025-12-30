@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Лайки для вопросов
     document.querySelectorAll('.like-btn[data-question-id]').forEach(button => {
         button.addEventListener('click', function () {
             const questionId = this.dataset.questionId;
@@ -7,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!questionId || !value) return;
 
-            fetch(`/api/question/${questionId}/like/`, {
+            fetch(`/question/${questionId}/like/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -18,30 +17,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Обновляем счетчик
                         const counter = document.querySelector(`.like-count[data-question-id="${questionId}"]`);
                         if (counter) {
                             counter.textContent = data.new_rating;
                         }
-
-                        // Обновляем стили кнопок
                         updateLikeButtons(questionId, value, 'question');
                     } else {
                         if (data.redirect) {
                             window.location.href = '/login/';
                         } else {
-                            alert(data.error || 'Произошла ошибка');
+                            alert(data.error || 'An error occurred');
                         }
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Произошла ошибка при отправке запроса');
+                    alert('Error sending request');
                 });
         });
     });
 
-    // Лайки для ответов
     document.querySelectorAll('.like-btn[data-answer-id]').forEach(button => {
         button.addEventListener('click', function () {
             const answerId = this.dataset.answerId;
@@ -49,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!answerId || !value) return;
 
-            fetch(`/api/answer/${answerId}/like/`, {
+            fetch(`/answer/${answerId}/like/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,30 +55,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Обновляем счетчик
                         const counter = document.querySelector(`.like-count[data-answer-id="${answerId}"]`);
                         if (counter) {
                             counter.textContent = data.new_rating;
                         }
-
-                        // Обновляем стили кнопок
                         updateLikeButtons(answerId, value, 'answer');
                     } else {
                         if (data.redirect) {
                             window.location.href = '/login/';
                         } else {
-                            alert(data.error || 'Произошла ошибка');
+                            alert(data.error || 'An error occurred');
                         }
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Произошла ошибка при отправке запроса');
+                    alert('Error sending request');
                 });
         });
     });
 
-    // Поиск с автодополнением
     const searchInput = document.querySelector('input[type="search"]');
     if (searchInput) {
         let timeoutId;
@@ -110,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 300);
         });
 
-        // Скрыть подсказки при клике вне поля
         document.addEventListener('click', function (event) {
             if (!event.target.closest('.search-container')) {
                 hideSuggestions();
@@ -118,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Форма добавления вопроса - ограничение длины тегов
     const tagsInput = document.getElementById('id_tags_input');
     if (tagsInput) {
         tagsInput.addEventListener('input', function () {
@@ -131,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Функции вспомогательные
     function updateLikeButtons(id, value, type) {
         const selector = type === 'question' ?
             `.like-btn[data-question-id="${id}"]` :
@@ -151,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
             warning = document.createElement('div');
             warning.id = 'tag-limit-warning';
             warning.className = 'alert alert-warning mt-2';
-            warning.textContent = 'Можно указать не более 3 тегов';
+            warning.textContent = 'You can specify up to 3 tags';
 
             const form = tagsInput.closest('form');
             form.insertBefore(warning, tagsInput.nextElementSibling);
@@ -178,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (suggestions.length === 0) {
-            container.innerHTML = '<div class="suggestion-item">Ничего не найдено</div>';
+            container.innerHTML = '<div class="suggestion-item">No results found</div>';
         } else {
             container.innerHTML = suggestions.map(suggestion =>
                 `<a href="${suggestion.url}" class="suggestion-item">${highlightText(suggestion.text, query)}</a>`

@@ -1,7 +1,7 @@
 from django.utils import timezone
 from datetime import timedelta
 from django.db.models import Count, Q, Sum
-from .models import Tag, Question
+from .models import Tag
 
 def site_info(request):
     popular_tags = Tag.objects.annotate(

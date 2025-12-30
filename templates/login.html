@@ -1,11 +1,12 @@
 ﻿{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
         <div class="card">
             <div class="card-header">
-                <h2 class="mb-0">Вход</h2>
+                <h2 class="mb-0">Login</h2>
             </div>
             <div class="card-body">
                 {% if messages %}
@@ -55,13 +56,13 @@
                     </div>
 
                     <div class="d-grid gap-2 mb-3">
-                        <button type="submit" class="btn btn-primary btn-lg">Войти</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Login</button>
                     </div>
 
                     <div class="text-center">
-                        <p class="mb-2">Нет аккаунта?</p>
+                        <p class="mb-2">Don't have an account?</p>
                         <a href="{% url 'signup' %}" class="btn btn-outline-primary">
-                            Зарегистрироваться
+                            Sign Up
                         </a>
                     </div>
                 </form>

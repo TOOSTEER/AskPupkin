@@ -1,11 +1,12 @@
 ﻿{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Популярные вопросы</h2>
+    <h2>Popular Questions</h2>
     <div>
-        <a href="{% url 'index' %}" class="btn btn-outline-secondary">Новые вопросы</a>
-        <a href="{% url 'ask' %}" class="btn btn-primary ms-2">Задать вопрос</a>
+        <a href="{% url 'index' %}" class="btn btn-outline-secondary">New Questions</a>
+        <a href="{% url 'ask' %}" class="btn btn-primary ms-2">Ask Question</a>
     </div>
 </div>
 
@@ -16,12 +17,12 @@
         <div class="col-md-2">
             <div class="question-stats">
                 <div class="votes">{{ question.rating }}</div>
-                <div class="text-muted small">голосов</div>
+                <div class="text-muted small">votes</div>
 
                 <div class="answers mt-2 {% if question.get_answers_count > 0 %}has-answer{% endif %}">
                     {{ question.get_answers_count }}
                 </div>
-                <div class="text-muted small">ответов</div>
+                <div class="text-muted small">answers</div>
             </div>
 
             <div class="like-buttons mt-3">
@@ -49,12 +50,12 @@
             </div>
 
             <div class="question-meta mt-2">
-                <span class="text-muted">{{ question.time_since_created }}</span>
+                <span class="text-muted">{{ question.time_since_created }} ago</span>
                 <a href="#" class="ms-2">
                     {% if question.author.profile.avatar %}
-                    <img src="{{ question.author.profile.avatar.url }}" alt="Аватар" class="avatar-sm">
+                    <img src="{{ question.author.profile.avatar.url }}" alt="Avatar" class="avatar-sm">
                     {% else %}
-                    <img src="/static/img/default-avatar.png" alt="Аватар" class="avatar-sm">
+                    <img src="{% static 'img/default-avatar.png' %}" alt="Avatar" class="avatar-sm">
                     {% endif %}
                     {{ question.author.username }}
                 </a>
@@ -67,7 +68,7 @@
     {% include 'pagination.html' with page=questions %}
 {% else %}
 <div class="alert alert-info">
-    Пока нет вопросов. Будьте первым, кто <a href="{% url 'ask' %}">задаст вопрос</a>!
+    No questions yet. Be the first to <a href="{% url 'ask' %}">ask a question</a>!
 </div>
 {% endif %}
 {% endblock %}

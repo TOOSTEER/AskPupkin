@@ -1,9 +1,10 @@
 ﻿{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Вопросы с тегом: {{ tag.name }}</h2>
-    <a href="{% url 'ask' %}" class="btn btn-primary">Задать вопрос</a>
+    <h2>Questions with tag: {{ tag.name }}</h2>
+    <a href="{% url 'ask' %}" class="btn btn-primary">Ask Question</a>
 </div>
 
 {% if questions %}
@@ -13,11 +14,11 @@
         <div class="col-md-2">
             <div class="question-stats">
                 <div class="votes">{{ question.rating }}</div>
-                <div class="text-muted small">голосов</div>
+                <div class="text-muted small">votes</div>
                 <div class="answers mt-2 {% if question.get_answers_count > 0 %}has-answer{% endif %}">
                     {{ question.get_answers_count }}
                 </div>
-                <div class="text-muted small">ответов</div>
+                <div class="text-muted small">answers</div>
             </div>
         </div>
 
@@ -35,12 +36,12 @@
             </div>
 
             <div class="question-meta mt-2">
-                <span class="text-muted">{{ question.time_since_created }}</span>
+                <span class="text-muted">{{ question.time_since_created }} ago</span>
                 <a href="#" class="ms-2">
                     {% if question.author.profile.avatar %}
-                    <img src="{{ question.author.profile.avatar.url }}" alt="Аватар" class="avatar-sm">
+                    <img src="{{ question.author.profile.avatar.url }}" alt="Avatar" class="avatar-sm">
                     {% else %}
-                    <img src="/static/img/default-avatar.png" alt="Аватар" class="avatar-sm">
+                    <img src="{% static 'img/default-avatar.png' %}" alt="Avatar" class="avatar-sm">
                     {% endif %}
                     {{ question.author.username }}
                 </a>
@@ -53,7 +54,7 @@
     {% include 'pagination.html' with page=questions %}
 {% else %}
 <div class="alert alert-info">
-    Пока нет вопросов с тегом "{{ tag.name }}"
+    No questions with tag "{{ tag.name }}"
 </div>
 {% endif %}
 {% endblock %}

@@ -1,12 +1,12 @@
 ﻿{% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h2 class="mb-0">Редактирование профиля</h2>
+                <h2 class="mb-0">Edit Profile</h2>
             </div>
             <div class="card-body">
                 {% if messages %}
@@ -23,7 +23,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="mb-3">Основная информация</h4>
+                            <h4 class="mb-3">Basic Information</h4>
 
                             <div class="mb-3">
                                 {{ user_form.username.label_tag }}
@@ -52,14 +52,14 @@
                         </div>
 
                         <div class="col-md-6">
-                            <h4 class="mb-3">Аватар</h4>
+                            <h4 class="mb-3">Avatar</h4>
 
                             <div class="mb-3">
                                 {% if user.profile.avatar %}
                                 <div class="mb-2">
-                                    <p>Текущий аватар:</p>
+                                    <p>Current avatar:</p>
                                     <img src="{{ user.profile.avatar.url }}"
-                                         alt="Аватар {{ user.username }}"
+                                         alt="Avatar {{ user.username }}"
                                          class="img-thumbnail"
                                          width="150">
                                 </div>
@@ -80,8 +80,8 @@
                     </div>
 
                     <div class="d-flex justify-content-between mt-4">
-                        <a href="{% url 'profile' %}" class="btn btn-secondary">Назад к профилю</a>
-                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        <a href="{% url 'profile' %}" class="btn btn-secondary">Back to Profile</a>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
             </div>

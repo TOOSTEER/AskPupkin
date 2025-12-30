@@ -9,20 +9,20 @@ class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Имя пользователя',
+            'placeholder': 'Username',
             'autofocus': True
         })
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Пароль'
+            'placeholder': 'Password'
         })
     )
     
     error_messages = {
-        'invalid_login': "Неверное имя пользователя или пароль.",
-        'inactive': "Этот аккаунт неактивен.",
+        'invalid_login': "Invalid username or password.",
+        'inactive': "This account is inactive.",
     }
 
 class UserRegistrationForm(UserCreationForm):
@@ -37,24 +37,24 @@ class UserRegistrationForm(UserCreationForm):
         max_length=150,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Имя пользователя'
+            'placeholder': 'Username'
         }),
-        help_text="Не более 150 символов. Только буквы, цифры и @/./+/-/_"
+        help_text="Maximum 150 characters. Letters, digits and @/./+/-/_ only."
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Пароль'
+            'placeholder': 'Password'
         }),
-        label='Пароль',
-        help_text="Пароль должен содержать не менее 8 символов"
+        label='Password',
+        help_text="Password must be at least 8 characters"
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Подтвердите пароль'
+            'placeholder': 'Confirm Password'
         }),
-        label='Подтверждение пароля'
+        label='Password Confirmation'
     )
     
     class Meta:
@@ -64,13 +64,13 @@ class UserRegistrationForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            raise ValidationError("Пользователь с таким email уже существует")
+            raise ValidationError("User with this email already exists")
         return email
     
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if User.objects.filter(username=username).exists():
-            raise ValidationError("Пользователь с таким именем уже существует")
+            raise ValidationError("User with this username already exists")
         return username
 
 class ProfileForm(forms.ModelForm):
@@ -85,18 +85,18 @@ class ProfileForm(forms.ModelForm):
             }),
         }
         labels = {
-            'avatar': 'Аватар',
+            'avatar': 'Avatar',
         }
     
     def clean_avatar(self):
         avatar = self.cleaned_data.get('avatar')
         if avatar:
             if avatar.size > 2 * 1024 * 1024:
-                raise ValidationError('Размер изображения не должен превышать 2MB')
+                raise ValidationError('Image size should not exceed 2MB')
             ext = os.path.splitext(avatar.name)[1].lower()
             valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
             if ext not in valid_extensions:
-                raise ValidationError('Поддерживаемые форматы: JPG, JPEG, PNG, GIF')
+                raise ValidationError('Supported formats: JPG, JPEG, PNG, GIF')
         return avatar
 
 class UserEditForm(forms.ModelForm):
@@ -114,7 +114,7 @@ class UserEditForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Имя пользователя'
+                'placeholder': 'Username'
             }),
         }
     
@@ -122,14 +122,14 @@ class UserEditForm(forms.ModelForm):
         email = self.cleaned_data.get('email')
         user_id = self.instance.id
         if User.objects.filter(email=email).exclude(id=user_id).exists():
-            raise ValidationError("Пользователь с таким email уже существует")
+            raise ValidationError("User with this email already exists")
         return email
     
     def clean_username(self):
         username = self.cleaned_data.get('username')
         user_id = self.instance.id
         if User.objects.filter(username=username).exclude(id=user_id).exists():
-            raise ValidationError("Пользователь с таким именем уже существует")
+            raise ValidationError("User with this username already exists")
         return username
 
 class QuestionForm(forms.ModelForm):
@@ -137,42 +137,36 @@ class QuestionForm(forms.ModelForm):
         max_length=255,
         required=False,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Введите до 3 тегов через запятую',
+            'placeholder': 'Enter up to 3 tags separated by commas',
             'class': 'form-control',
             'id': 'tags-input'
         }),
-        label='Теги',
-        help_text="Можно указать не более 3 тегов"
+        label='Tags',
+        help_text="You can specify up to 3 tags"
     )
     
     class Meta:
         model = Question
-        fields = ['title', 'content', 'image']
+        fields = ['title', 'content']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Введите заголовок вопроса',
+                'placeholder': 'Enter question title',
                 'maxlength': '255'
             }),
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Опишите свой вопрос подробно',
+                'placeholder': 'Describe your question in detail',
                 'rows': 10,
                 'maxlength': '5000'
             }),
-            'image': forms.FileInput(attrs={
-                'class': 'form-control',
-                'accept': 'image/*',
-                'id': 'question-image-upload'
-            }),
         }
         labels = {
-            'title': 'Заголовок',
-            'content': 'Содержание',
-            'image': 'Изображение (опционально)',
+            'title': 'Title',
+            'content': 'Content',
         }
         help_texts = {
-            'content': 'Максимальная длина: 5000 символов',
+            'content': 'Maximum length: 5000 characters',
         }
     
     def clean_tags_input(self):
@@ -180,27 +174,16 @@ class QuestionForm(forms.ModelForm):
         tags = [tag.strip().lower() for tag in tags_str.split(',') if tag.strip()]
         
         if len(tags) > 3:
-            raise ValidationError('Можно указать не более 3 тегов')
+            raise ValidationError('You can specify up to 3 tags')
         
         if len(tags) == 0:
-            raise ValidationError('Укажите хотя бы один тег')
+            raise ValidationError('Specify at least one tag')
         
         for tag in tags:
             if len(tag) > 50:
-                raise ValidationError(f'Тег "{tag}" слишком длинный (максимум 50 символов)')
+                raise ValidationError(f'Tag "{tag}" is too long (maximum 50 characters)')
         
         return tags
-    
-    def clean_image(self):
-        image = self.cleaned_data.get('image')
-        if image:
-            if image.size > 5 * 1024 * 1024:
-                raise ValidationError('Размер изображения не должен превышать 5MB')
-            ext = os.path.splitext(image.name)[1].lower()
-            valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
-            if ext not in valid_extensions:
-                raise ValidationError('Поддерживаемые форматы: JPG, JPEG, PNG, GIF')
-        return image
     
     def save(self, commit=True, author=None):
         question = super().save(commit=False)
@@ -224,36 +207,19 @@ class QuestionForm(forms.ModelForm):
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
-        fields = ['content', 'image']
+        fields = ['content']
         widgets = {
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Введите ваш ответ',
+                'placeholder': 'Enter your answer',
                 'rows': 6,
                 'maxlength': '3000',
                 'id': 'answer-content'
             }),
-            'image': forms.FileInput(attrs={
-                'class': 'form-control',
-                'accept': 'image/*',
-                'id': 'answer-image-upload'
-            }),
         }
         labels = {
-            'content': 'Ответ',
-            'image': 'Изображение (опционально)',
+            'content': 'Answer',
         }
         help_texts = {
-            'content': 'Максимальная длина: 3000 символов',
+            'content': 'Maximum length: 3000 characters',
         }
-    
-    def clean_image(self):
-        image = self.cleaned_data.get('image')
-        if image:
-            if image.size > 5 * 1024 * 1024:
-                raise ValidationError('Размер изображения не должен превышать 5MB')
-            ext = os.path.splitext(image.name)[1].lower()
-            valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
-            if ext not in valid_extensions:
-                raise ValidationError('Поддерживаемые форматы: JPG, JPEG, PNG, GIF')
-        return image

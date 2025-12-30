@@ -1,4 +1,42 @@
-﻿ДЗ1 - стат.вёрстка:
+﻿Лёгкий гайд по установке:100:
+
+🚀 Быстрый старт
+Предварительные требования
+Python 3.9 или выше
+
+Git (для клонирования репозитория)
+
+Доступ к командной строке
+
+Создание виртуального окружения
+
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+Установка зависимостей
+
+pip install -r requirements.txt
+Настройка базы данных
+
+# Создание миграций
+python manage.py makemigrations
+
+# Применение миграций
+python manage.py migrate
+Создание администратора
+
+python manage.py createsuperuser
+Запуск сервера
+
+python manage.py runserver
+Открытие в браузере
+Перейдите по адресу: http://127.0.0.1:8000/
+
+ДЗ1 - стат.вёрстка:
 
 Реализованные страницы:
 

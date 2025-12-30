@@ -1,22 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.urls import reverse
-from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse
-from django.db.models import Count, Q
-from django.utils import timezone
-from datetime import timedelta
+from django.http import JsonResponse, HttpResponseForbidden
+from django.db.models import Count
 from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 import json
-from .models import Question, Answer, Tag, Profile, QuestionLike, AnswerLike
+from .models import Question, Answer, Tag, QuestionLike, AnswerLike
 from .forms import (
     QuestionForm, AnswerForm, UserRegistrationForm, 
     ProfileForm, UserEditForm, CustomAuthenticationForm
 )
-from .mixins import LoginRequiredRedirectMixin
 
 def paginate(objects_list, request, per_page=10):
     paginator = Paginator(objects_list, per_page)
@@ -32,7 +29,7 @@ def paginate(objects_list, request, per_page=10):
     return page
 
 def index(request):
-    questions = Question.objects.with_details().new()
+    questions = Question.objects.prefetch_related('tags', 'author__profile').order_by('-created_date')
     page = paginate(questions, request, 20)
     return render(request, 'index.html', {
         'questions': page,
@@ -40,7 +37,7 @@ def index(request):
     })
 
 def hot(request):
-    questions = Question.objects.with_details().hot()
+    questions = Question.objects.prefetch_related('tags', 'author__profile').order_by('-rating', '-created_date')
     page = paginate(questions, request, 20)
     return render(request, 'hot.html', {
         'questions': page,
@@ -49,7 +46,7 @@ def hot(request):
 
 def tag(request, tag_name):
     tag_obj = get_object_or_404(Tag, name=tag_name)
-    questions = Question.objects.with_details().by_tag(tag_name)
+    questions = Question.objects.filter(tags__name=tag_name).prefetch_related('tags', 'author__profile').order_by('-rating', '-created_date')
     page = paginate(questions, request, 20)
     return render(request, 'tag.html', {
         'questions': page,
@@ -59,8 +56,7 @@ def tag(request, tag_name):
 
 def question(request, question_id):
     question_obj = get_object_or_404(
-        Question.objects.with_details()
-        .prefetch_related('answers__author__profile'),
+        Question.objects.prefetch_related('tags', 'author__profile', 'answers__author__profile'),
         id=question_id
     )
     
@@ -88,7 +84,7 @@ def question(request, question_id):
             
             return redirect(redirect_url)
         else:
-            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+            messages.error(request, 'Please correct the errors in the form.')
     else:
         form = AnswerForm()
     
@@ -105,10 +101,10 @@ def ask(request):
         form = QuestionForm(request.POST, request.FILES)
         if form.is_valid():
             question = form.save(author=request.user)
-            messages.success(request, 'Вопрос успешно добавлен!')
+            messages.success(request, 'Question added successfully!')
             return redirect('question', question_id=question.id)
         else:
-            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+            messages.error(request, 'Please correct the errors in the form.')
     else:
         form = QuestionForm()
     
@@ -129,10 +125,10 @@ def login_view(request):
             if not next_url or next_url == reverse('logout'):
                 next_url = 'index'
             
-            messages.success(request, f'Добро пожаловать, {user.username}!')
+            messages.success(request, f'Welcome, {user.username}!')
             return redirect(next_url)
         else:
-            messages.error(request, 'Неверное имя пользователя или пароль.')
+            messages.error(request, 'Invalid username or password.')
     else:
         form = CustomAuthenticationForm()
     
@@ -156,15 +152,16 @@ def signup(request):
             user.set_password(user_form.cleaned_data['password1'])
             user.save()
             
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
+            profile = user.profile
+            if profile_form.cleaned_data['avatar']:
+                profile.avatar = profile_form.cleaned_data['avatar']
+                profile.save()
             
             login(request, user)
-            messages.success(request, 'Регистрация прошла успешно!')
+            messages.success(request, 'Registration successful!')
             return redirect('index')
         else:
-            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+            messages.error(request, 'Please correct the errors in the form.')
     else:
         user_form = UserRegistrationForm()
         profile_form = ProfileForm()
@@ -187,10 +184,10 @@ def profile_edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Профиль успешно обновлен!')
+            messages.success(request, 'Profile updated successfully!')
             return redirect('profile')
         else:
-            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+            messages.error(request, 'Please correct the errors in the form.')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
@@ -215,29 +212,28 @@ def profile(request):
 @login_required
 def logout_view(request):
     logout(request)
-    messages.info(request, 'Вы успешно вышли из системы.')
+    messages.info(request, 'You have been logged out successfully.')
     return redirect(request.GET.get('next', 'index'))
 
-@login_required
 @require_POST
 @csrf_exempt
 def question_like_ajax(request, question_id):
     if not request.user.is_authenticated:
-        return JsonResponse({'success': False, 'error': 'Требуется авторизация', 'redirect': reverse('login')})
+        return JsonResponse({'success': False, 'error': 'Authentication required', 'redirect': reverse('login')})
     
     try:
         question = Question.objects.get(id=question_id)
     except Question.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'Вопрос не найден'})
+        return JsonResponse({'success': False, 'error': 'Question not found'})
     
     try:
         data = json.loads(request.body)
         value = int(data.get('value', 0))
     except (json.JSONDecodeError, ValueError):
-        return JsonResponse({'success': False, 'error': 'Неверный формат данных'})
+        return JsonResponse({'success': False, 'error': 'Invalid data format'})
     
     if value not in [1, -1]:
-        return JsonResponse({'success': False, 'error': 'Неверное значение лайка'})
+        return JsonResponse({'success': False, 'error': 'Invalid like value'})
     
     like, created = QuestionLike.objects.get_or_create(
         user=request.user,
@@ -268,26 +264,25 @@ def question_like_ajax(request, question_id):
         'user_value': user_value
     })
 
-@login_required
 @require_POST
 @csrf_exempt
 def answer_like_ajax(request, answer_id):
     if not request.user.is_authenticated:
-        return JsonResponse({'success': False, 'error': 'Требуется авторизация', 'redirect': reverse('login')})
+        return JsonResponse({'success': False, 'error': 'Authentication required', 'redirect': reverse('login')})
     
     try:
         answer = Answer.objects.get(id=answer_id)
     except Answer.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'Ответ не найден'})
+        return JsonResponse({'success': False, 'error': 'Answer not found'})
     
     try:
         data = json.loads(request.body)
         value = int(data.get('value', 0))
     except (json.JSONDecodeError, ValueError):
-        return JsonResponse({'success': False, 'error': 'Неверный формат данных'})
+        return JsonResponse({'success': False, 'error': 'Invalid data format'})
     
     if value not in [1, -1]:
-        return JsonResponse({'success': False, 'error': 'Неверное значение лайка'})
+        return JsonResponse({'success': False, 'error': 'Invalid like value'})
     
     like, created = AnswerLike.objects.get_or_create(
         user=request.user,
@@ -326,8 +321,8 @@ def mark_answer_correct(request, answer_id):
     
     if question.author != request.user:
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return JsonResponse({'success': False, 'error': 'Вы не автор этого вопроса'}, status=403)
-        return HttpResponseForbidden("Вы не автор этого вопроса")
+            return JsonResponse({'success': False, 'error': 'You are not the author of this question'}, status=403)
+        return HttpResponseForbidden("You are not the author of this question")
     
     question.answers.filter(is_correct=True).update(is_correct=False)
     
@@ -339,22 +334,21 @@ def mark_answer_correct(request, answer_id):
     
     return redirect('question', question_id=question.id)
 
-@login_required
 @require_POST
 @csrf_exempt
 def mark_answer_correct_ajax(request, answer_id):
     if not request.user.is_authenticated:
-        return JsonResponse({'success': False, 'error': 'Требуется авторизация', 'redirect': reverse('login')})
+        return JsonResponse({'success': False, 'error': 'Authentication required', 'redirect': reverse('login')})
     
     try:
         answer = Answer.objects.get(id=answer_id)
     except Answer.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'Ответ не найден'})
+        return JsonResponse({'success': False, 'error': 'Answer not found'})
     
     question = answer.question
     
     if question.author != request.user:
-        return JsonResponse({'success': False, 'error': 'Вы не автор этого вопроса'}, status=403)
+        return JsonResponse({'success': False, 'error': 'You are not the author of this question'}, status=403)
     
     question.answers.filter(is_correct=True).update(is_correct=False)
     
@@ -367,7 +361,6 @@ def mark_answer_correct_ajax(request, answer_id):
         'question_id': question.id
     })
 
-@login_required
 @require_GET
 def check_user_like_status(request):
     if not request.user.is_authenticated:

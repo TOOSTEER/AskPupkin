@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function validateImageSize(file, maxSizeMB) {
         const maxSizeBytes = maxSizeMB * 1024 * 1024;
         if (file.size > maxSizeBytes) {
-            alert(`Размер изображения не должен превышать ${maxSizeMB}MB`);
+            alert(`Image size should not exceed ${maxSizeMB}MB`);
             return false;
         }
         return true;
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function validateImageType(file) {
         const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
         if (!validTypes.includes(file.type)) {
-            alert('Поддерживаемые форматы: JPG, JPEG, PNG, GIF');
+            alert('Supported formats: JPG, JPEG, PNG, GIF');
             return false;
         }
         return true;
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .catch(error => {
-                errorCallback('Произошла ошибка при загрузке изображения');
+                errorCallback('Error uploading image');
             });
     }
 
